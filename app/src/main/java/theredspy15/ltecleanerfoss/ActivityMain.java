@@ -35,7 +35,7 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(ActivityMain.this, ""+appInfoList.get(i).packageName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityMain.this, ""+appInfoList.get(i).name, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 Uri uri = Uri.fromParts("package", appInfoList.get(i).packageName, null);

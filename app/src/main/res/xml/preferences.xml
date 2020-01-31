@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="Settings" android:key="settings">
+
+    <Preference android:title="@string/privacy_policy"
+        android:summary="@string/privacy_sum">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://cdn.rawgit.com/TheRedSpy15/LTECleanerFOSS/d9522c76/privacy_policy.html" />
+    </Preference>
+
+    <Preference android:title="@string/whitelist"
+        android:key="whitelist"
+        android:summary="@string/whitelist_sum">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="theredspy15.ltecleanerfoss"
+            android:targetClass="theredspy15.ltecleanerfoss.WhitelistActivity" />
+    </Preference>
+
+    <Preference android:title="@string/make_suggestion"
+        android:key="suggestion"
+        android:summary="@string/suggestion_sum">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.package.name"
+            android:targetClass="com.package.name.ActivityName" />
+    </Preference>
+
+    <PreferenceCategory android:title="Filters">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:textColor="#FFF"
+            android:key="generic"
+            android:persistent="true"
+            android:summary="@string/generic_sum"
+            android:title="@string/enable_generic_filter" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:textColor="#FFF"
+            android:key="aggressive"
+            android:persistent="true"
+            android:summary="@string/aggressive_sum"
+            android:title="@string/aggressive_filter" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:textColor="#FFF"
+            android:key="empty"
+            android:persistent="true"
+            android:title="@string/delete_empty_folders" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:textColor="#FFF"
+            android:key="apk"
+            android:persistent="true"
+            android:summary="@string/apk_sum"
+            android:title="@string/delete_apk_files" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:textColor="#FFF"
+            android:key="one_click"
+            android:persistent="true"
+            android:summary="@string/oneclick_sum"
+            android:title="@string/one_click_clean" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:textColor="#FFF"
+            android:key="auto_white"
+            android:persistent="true"
+            android:summary="@string/autowhite_sum"
+            android:title="@string/auto_whitelist" />
+    </PreferenceCategory>
+</PreferenceScreen>

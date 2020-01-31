@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * Created by dgureev on 9/23/14.
  */
-class AppInfo implements Comparable<AppInfo>{
+class AppInfo implements Comparable<AppInfo> {
 
     String name;
     String versionName;
     Drawable icon;
-    private String packageName;
-    private int versionCode;
+    String packageName;
+    int versionCode;
 
     @SuppressLint("WrongConstant")
     static List<AppInfo> getAppInfoList(Activity a) {

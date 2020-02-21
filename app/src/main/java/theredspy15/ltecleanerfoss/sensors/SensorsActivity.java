@@ -23,7 +23,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     private LinearLayout sensorLayout;
     private TextView textView;
     private int sensorInd;
-
     private  SensorManager sensorManager;
     private Sensor lightSensor;
     private Sensor proximitySensor;
@@ -36,6 +35,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         textView = findViewById(R.id.sensors);
 
+        sensorLayout=findViewById(R.id.sensors_layout);
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);

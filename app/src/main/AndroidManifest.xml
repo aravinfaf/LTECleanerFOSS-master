@@ -13,18 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".sensors.SensorsActivity">
+        <activity android:name=".sensors.CameraActivity"></activity>
+        <activity android:name=".sensors.TouchSensorActivity" />
+        <activity android:name=".scan.MainScan" />
+        <activity android:name=".SensorDashboardActivity" />
+        <activity android:name=".sensors.FlashLightActivity" />
+        <activity android:name=".sensors.AccelerometerSensorActivity" />
+        <activity android:name=".sensors.SensorsActivity" />
+        <activity android:name=".permission.AllowedPermissions" />
+        <activity android:name=".sensors.MotionSensorActivity" />
+        <activity android:name=".ListSensorsActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".permission.AllowedPermissions"></activity>
-        <activity android:name=".sensors.MotionSensorActivity"></activity>
-        <activity android:name=".ListSensorsActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".Splash" />
         <activity
             android:name=".PromptActivity"
             android:label="@string/title_activity_prompt"
@@ -42,13 +48,12 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SettingsTheme" />
-        <activity android:name=".ActivityMain">
-
-        </activity>
+        <activity android:name=".ActivityMain" />
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

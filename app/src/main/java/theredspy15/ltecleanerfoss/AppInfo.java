@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by dgureev on 9/23/14.
- */
 class AppInfo implements Comparable<AppInfo> {
 
     String name;
@@ -41,7 +38,7 @@ class AppInfo implements Comparable<AppInfo> {
         }
 
         Collections.sort(appInfoList);
-        return appInfoList;
+        return appInfoList; 
     }
 
     @Override

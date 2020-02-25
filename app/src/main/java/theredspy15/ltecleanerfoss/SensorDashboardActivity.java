@@ -9,13 +9,14 @@ import android.view.View;
 
 import theredspy15.ltecleanerfoss.sensors.AccelerometerSensorActivity;
 import theredspy15.ltecleanerfoss.sensors.CameraActivity;
+import theredspy15.ltecleanerfoss.sensors.FingerprintSensorActivity;
 import theredspy15.ltecleanerfoss.sensors.FlashLightActivity;
 import theredspy15.ltecleanerfoss.sensors.MotionSensorActivity;
 import theredspy15.ltecleanerfoss.sensors.TouchSensorActivity;
 
 public class SensorDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView allowed_permissionCV, listsensorsCV, motionsensorCV, accelerometerCV, flashlightCV, touchCV, cameraCV;
+    CardView allowed_permissionCV, listsensorsCV, motionsensorCV, accelerometerCV, flashlightCV, touchCV, cameraCV, fingerprintCV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class SensorDashboardActivity extends AppCompatActivity implements View.O
         listsensorsCV = findViewById(R.id.listsensorsCV);
         touchCV = findViewById(R.id.touchCV);
         cameraCV = findViewById(R.id.cameraCV);
+        fingerprintCV = findViewById(R.id.fingerprintCV);
 
         allowed_permissionCV.setOnClickListener(this::onClick);
         motionsensorCV.setOnClickListener(this::onClick);
@@ -37,6 +39,7 @@ public class SensorDashboardActivity extends AppCompatActivity implements View.O
         listsensorsCV.setOnClickListener(this::onClick);
         touchCV.setOnClickListener(this::onClick);
         cameraCV.setOnClickListener(this::onClick);
+        fingerprintCV.setOnClickListener(this::onClick);
     }
 
     @Override
@@ -64,6 +67,9 @@ public class SensorDashboardActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.cameraCV:
                 startActivity(new Intent(SensorDashboardActivity.this, CameraActivity.class));
+                break;
+            case R.id.fingerprintCV:
+                startActivity(new Intent(SensorDashboardActivity.this, FingerprintSensorActivity.class));
                 break;
         }
     }

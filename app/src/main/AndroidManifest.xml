@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".sensors.CameraActivity"></activity>
+        <activity android:name=".FreqActivity"></activity>
+        <activity android:name=".EmailPhoneActivity" />
+        <activity android:name=".sensors.FingerprintSensorActivity" />
+        <activity android:name=".sensors.CameraActivity" />
         <activity android:name=".sensors.TouchSensorActivity" />
         <activity android:name=".scan.MainScan" />
         <activity android:name=".SensorDashboardActivity" />
@@ -50,10 +53,13 @@
             android:theme="@style/SettingsTheme" />
         <activity android:name=".ActivityMain" />
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
 </manifest>

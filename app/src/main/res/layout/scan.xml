@@ -46,6 +46,17 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dimen_40dp">
 
+            <TextView
+                android:id="@+id/shareTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHARE"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:visibility="gone"/>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,6 +68,8 @@
                 android:layout_marginRight="35dp"
                 android:layout_marginBottom="-20dp"
                 android:elevation="10dp">
+
+
 
                 <Button
                     android:id="@+id/startScanButton"
@@ -162,6 +175,7 @@
                                 android:textColor="@android:color/black"
                                 android:textStyle="bold" />
                         </LinearLayout>
+
 
                     </RelativeLayout>
 

@@ -97,10 +97,8 @@ public class FileScanner {
                 return true;
             }
         }
-
         return false;
     }
-
 
     /**
      * Runs as for each loop through the extension filter, and checks if

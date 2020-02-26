@@ -38,6 +38,7 @@ class AppListAdapter extends ArrayAdapter<AppInfo> {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         View vi = view;
         if (view == null)
             vi = inflater.inflate(R.layout.app_info_item, null);

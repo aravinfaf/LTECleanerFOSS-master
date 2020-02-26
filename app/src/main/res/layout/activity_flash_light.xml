@@ -14,4 +14,16 @@
         android:checked="false"
         android:text="Turn On/Off Camera LED/ Flashlight Android" />
 
+    <TextView
+        android:id="@+id/shareTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SHARE"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:visibility="gone"/>
+
 </LinearLayout>

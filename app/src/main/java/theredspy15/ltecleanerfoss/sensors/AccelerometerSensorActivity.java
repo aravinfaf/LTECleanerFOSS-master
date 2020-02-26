@@ -1,16 +1,25 @@
 package theredspy15.ltecleanerfoss.sensors;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import theredspy15.ltecleanerfoss.PrefUtils;
 import theredspy15.ltecleanerfoss.R;
 
 public class AccelerometerSensorActivity extends AppCompatActivity implements SensorEventListener {
@@ -33,6 +42,7 @@ public class AccelerometerSensorActivity extends AppCompatActivity implements Se
     private TextView currentX, currentY, currentZ, maxX, maxY, maxZ;
 
     public Vibrator v;
+    TextView shareTV;
 
 
     @Override
@@ -66,6 +76,7 @@ public class AccelerometerSensorActivity extends AppCompatActivity implements Se
         maxX = (TextView) findViewById(R.id.maxX);
         maxY = (TextView) findViewById(R.id.maxY);
         maxZ = (TextView) findViewById(R.id.maxZ);
+        shareTV = (TextView) findViewById(R.id.shareTV);
     }
 
     //onResume() register the accelerometer for listening the events
@@ -136,6 +147,14 @@ public class AccelerometerSensorActivity extends AppCompatActivity implements Se
         currentX.setText(Float.toString(deltaX));
         currentY.setText(Float.toString(deltaY));
         currentZ.setText(Float.toString(deltaZ));
+
+        shareTV.setVisibility(View.VISIBLE);
+        shareTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                share();
+            }
+        });
     }
 
     // display the max x,y,z accelerometer values
@@ -153,4 +172,60 @@ public class AccelerometerSensorActivity extends AppCompatActivity implements Se
             maxZ.setText(Float.toString(deltaZMax));
         }
     }
+
+    private void share() {
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccelerometerSensorActivity.this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
+        bottomSheetDialog.show();
+
+        LinearLayout sms_LL = bottomSheetDialog.findViewById(R.id.sms_LL);
+        LinearLayout whatsapp_LL = bottomSheetDialog.findViewById(R.id.whatsapp_LL);
+
+        whatsapp_LL.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                PackageManager packageManager = getPackageManager();
+
+                if (packageManager != null) {
+
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+
+                    try {
+
+                        Intent waIntent = new Intent(Intent.ACTION_SEND);
+                        waIntent.setType("text/plain");
+                        String text = "Fingerprint test on device "+ PrefUtils.getFromPrefs(AccelerometerSensorActivity.this,"model","");
+                        waIntent.setPackage("com.whatsapp");
+                        if (waIntent != null) {
+                            waIntent.putExtra(Intent.EXTRA_TEXT, text);//
+                            startActivity(Intent.createChooser(waIntent, text));
+                        } else {
+                            Toast.makeText(AccelerometerSensorActivity.this, "WhatsApp not found", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(AccelerometerSensorActivity.this, "WhatsApp not installed!!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        sms_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:"+PrefUtils.getFromPrefs(AccelerometerSensorActivity.this,"email","")+
+                        "?subject=Accelerometer test on device "+PrefUtils.getFromPrefs(AccelerometerSensorActivity.this,"model",""));
+                intent.setData(data);
+                startActivity(intent);
+            }
+        });}
+
 }

@@ -53,6 +53,7 @@
             android:theme="@style/SettingsTheme" />
         <activity android:name=".ActivityMain" />
     </application>
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />

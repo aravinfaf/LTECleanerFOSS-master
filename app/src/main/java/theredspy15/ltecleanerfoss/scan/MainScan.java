@@ -1,7 +1,9 @@
 package theredspy15.ltecleanerfoss.scan;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +26,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import java.io.File;
 import java.util.ArrayList;
+
+import theredspy15.ltecleanerfoss.PrefUtils;
 import theredspy15.ltecleanerfoss.R;
 import theredspy15.ltecleanerfoss.scan.scan.DetectionsDisplay;
 import theredspy15.ltecleanerfoss.scan.scan.ScanFile;
+import theredspy15.ltecleanerfoss.sensors.FingerprintSensorActivity;
 
 
 public class MainScan extends AppCompatActivity {
@@ -42,6 +51,7 @@ public class MainScan extends AppCompatActivity {
     private final int READ_FILE_REQUEST_CODE = 777;
     private ArrayList<DetectionsDisplay> detections;
     private ArrayAdapter<DetectionsDisplay> detectionsDisplayArrayAdapter;
+    TextView shareTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,7 @@ public class MainScan extends AppCompatActivity {
         scanningFile = (TextView) findViewById(R.id.scanningFileTextView);
         filesScanned = (TextView) findViewById(R.id.filesScannedTextView);
         filesInfected = (TextView) findViewById(R.id.infectedFilesTextView);
+        shareTV = (TextView) findViewById(R.id.shareTV);
         ListView detectionsList = (ListView) findViewById(R.id.detectionsListView);
         toolbar.inflateMenu(R.menu.menu);
 
@@ -79,6 +90,16 @@ public class MainScan extends AppCompatActivity {
                 running = true;
                 disableStartButton();
                 new Scan().execute();
+
+                shareTV.setVisibility(View.VISIBLE);
+
+                shareTV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        share();
+                    }
+                });
             }
         });
 
@@ -296,4 +317,61 @@ public class MainScan extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+    private void share() {
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainScan.this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
+        bottomSheetDialog.show();
+
+        LinearLayout sms_LL = bottomSheetDialog.findViewById(R.id.sms_LL);
+        LinearLayout whatsapp_LL = bottomSheetDialog.findViewById(R.id.whatsapp_LL);
+
+        whatsapp_LL.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                PackageManager packageManager = getPackageManager();
+
+                if (packageManager != null) {
+
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+
+                    try {
+
+                        Intent waIntent = new Intent(Intent.ACTION_SEND);
+                        waIntent.setType("text/plain");
+                        String text = "File scan test on device " + PrefUtils.getFromPrefs(MainScan.this, "model", "");
+                        waIntent.setPackage("com.whatsapp");
+                        if (waIntent != null) {
+                            waIntent.putExtra(Intent.EXTRA_TEXT, text);//
+                            startActivity(Intent.createChooser(waIntent, text));
+                        } else {
+                            Toast.makeText(MainScan.this, "WhatsApp not found", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(MainScan.this, "WhatsApp not installed!!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        sms_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:"+PrefUtils.getFromPrefs(MainScan.this,"email","")+
+                        "?subject=File scan test on device "+PrefUtils.getFromPrefs(MainScan.this,"model",""));
+                intent.setData(data);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

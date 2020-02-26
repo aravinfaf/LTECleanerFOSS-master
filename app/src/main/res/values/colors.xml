@@ -21,4 +21,8 @@
 
     <color name="cardColor">#ffffff</color>
     <color name="textcardColor">#3f3f3f</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black_shade_1">#333333</color>
+    <color name="grey">#808080</color>
 </resources>
